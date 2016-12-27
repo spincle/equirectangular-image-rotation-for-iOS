@@ -49,15 +49,13 @@
 @interface rectRotation2 : CIFilter //warp kernel
 {
     CIImage *inputImage;
-    NSNumber* isX;
-    NSNumber* isY;
-    NSNumber* isZ;
-    NSNumber* angle;
+    NSNumber* roll;
+    NSNumber* yaw;
+    NSNumber* pitch;
 }
 @property (retain, nonatomic) CIImage *inputImage;
-@property (retain, nonatomic) NSNumber* isX;
-@property (retain, nonatomic) NSNumber* isY;
-@property (retain, nonatomic) NSNumber* isZ;
-@property (retain, nonatomic) NSNumber* angle;
+@property (retain, nonatomic) NSNumber* roll;
+@property (retain, nonatomic) NSNumber* yaw;
+@property (retain, nonatomic) NSNumber* pitch;
 
 @end

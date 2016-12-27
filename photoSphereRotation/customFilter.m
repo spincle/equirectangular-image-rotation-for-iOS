@@ -111,10 +111,9 @@
 @implementation rectRotation2
 
 @synthesize inputImage;
-@synthesize isX;
-@synthesize isY;
-@synthesize isZ;
-@synthesize angle;
+@synthesize roll;
+@synthesize yaw;
+@synthesize pitch;
 
 - (CIWarpKernel *)rectRotation2
 {
@@ -139,7 +138,7 @@
     float h=self.inputImage.extent.size.height;
     return [[self rectRotation2] applyWithExtent:CGRectMake(0, 0,w,h) roiCallback:^CGRect(int index, CGRect rect) {
         return CGRectMake(0, 0, w,h);
-    } inputImage:self.inputImage arguments:[NSArray arrayWithObjects:isX,isY,isZ,angle,@(w),@(h),nil]];
+    } inputImage:self.inputImage arguments:[NSArray arrayWithObjects:roll,yaw,pitch,@(w),@(h),nil]];
 }
 
 @end

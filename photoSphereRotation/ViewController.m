@@ -17,13 +17,13 @@
 float pi=3.141592654;
 NSURL* imageUrl;
 UIImageView* imgView;
+UIImage* inputImg;
 - (void)viewDidLoad {
     [super viewDidLoad];
     imageUrl = [[NSBundle mainBundle] URLForResource:@"sphere" withExtension:@"jpg"];
-    UIImage* inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
+    inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
     inputImg=[self applyRectRotation:inputImg];
-//    UIImageWriteToSavedPhotosAlbum(inputImg,
-//                                 nil,nil,nil);
+
     imgView=[[UIImageView alloc] init];
     float w=self.view.frame.size.width;
     float h=self.view.frame.size.height;
@@ -52,6 +52,20 @@ UIImageView* imgView;
     zSlider.value=0;
     [zSlider addTarget:self action:@selector(zSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: zSlider];
+    
+    UIButton* loadImageBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [loadImageBtn setBackgroundImage:[UIImage imageNamed: @"loadImgBtn.png"]forState:UIControlStateNormal];
+    loadImageBtn.frame=CGRectMake(5,5,70,50);
+    [loadImageBtn addTarget:self
+                    action:@selector(loadImage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:loadImageBtn];
+    
+    UIButton* saveImgBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [saveImgBtn setBackgroundImage:[UIImage imageNamed: @"save.png"]forState:UIControlStateNormal];
+    saveImgBtn.frame=CGRectMake(w-65,h-55,60,50);
+    [saveImgBtn addTarget:self
+                     action:@selector(saveImage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:saveImgBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,34 +75,26 @@ UIImageView* imgView;
 
 - (void)xSliderValueChange:(UISlider *) slider{
    // NSLog(@"value: %f",slider.value);
-    isX=1;isY=0;isZ=0;
-    angle=slider.value;
-    UIImage* inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
-    inputImg=[self applyRectRotation:inputImg];
-    [imgView setImage:inputImg];
+    roll=slider.value;
+    UIImage* outputImg=[self applyRectRotation:inputImg];
+    [imgView setImage:outputImg];
 }
 
 - (void)ySliderValueChange:(UISlider *) slider{
-    isX=0;isY=1;isZ=0;
-    angle=slider.value;
-    UIImage* inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
-    inputImg=[self applyRectRotation:inputImg];
-    [imgView setImage:inputImg];
+    yaw=slider.value;
+    UIImage* outputImg=[self applyRectRotation:inputImg];
+    [imgView setImage:outputImg];
 }
 
 - (void)zSliderValueChange:(UISlider *) slider{
-    isX=0;isY=0;isZ=1;
-    angle=slider.value;
-    UIImage* inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
-    inputImg=[self applyRectRotation:inputImg];
-    [imgView setImage:inputImg];
+    pitch=slider.value;
+    UIImage* outputImg=[self applyRectRotation:inputImg];
+    [imgView setImage:outputImg];
 }
 
-float isX=1;
-float isY=0;
-float isZ=0;
-float angle=0;
-
+float roll;
+float yaw;
+float pitch;
 -(UIImage*) applyRectRotation:(UIImage*) image{
     @autoreleasepool {
         
@@ -103,10 +109,9 @@ float angle=0;
 
         filter = [CIFilter filterWithName:@"rectRotation2"];
         [filter setValue:ciImage forKey:kCIInputImageKey];
-        [filter setValue:@(isX) forKey:@"isX"];
-        [filter setValue:@(isY) forKey:@"isY"];
-        [filter setValue:@(isZ) forKey:@"isZ"];
-        [filter setValue:@(angle) forKey:@"angle"];
+        [filter setValue:@(roll) forKey:@"roll"];
+        [filter setValue:@(yaw) forKey:@"yaw"];
+        [filter setValue:@(pitch) forKey:@"pitch"];;
         ciImage = filter.outputImage;
         
         cgImage = [context createCGImage:ciImage fromRect:CGRectMake(0, 0,w, h)];
@@ -118,4 +123,27 @@ float angle=0;
     }
 }
 
+UIImagePickerController *imagePicker;
+- (IBAction)loadImage:(id)sender {
+       imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = YES;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+
+-(IBAction)saveImage:(id)sender {
+    UIImage* outputImg=[self applyRectRotation:inputImg];
+    [imgView setImage:outputImg];
+    UIImageWriteToSavedPhotosAlbum(outputImg,
+                                     nil,nil,nil);
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    inputImg = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage* outputImg=[self applyRectRotation:inputImg];
+    [imgView setImage:outputImg];
+
+}
 @end

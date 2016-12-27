@@ -1,4 +1,4 @@
-kernel vec2 rectRotation(float x,float y, float z,float angle,float width, float height)
+kernel vec2 rectRotation(float roll,float yaw, float pitch,float width, float height)
 {
 vec2 dest;
 float theta,phi,r;
@@ -34,23 +34,19 @@ psph.y =-1.0*sin(phi) * sin(2.0*pi-theta);
 psph.z = cos(phi);
 
 //transform matrix multiply
-vec3 axis; axis.x=x; axis.y=y; axis.z=z;
-float s = sin(angle);
-float c = cos(angle);
-float oc = 1.0 - c;
 
 vec3 firstRow,secondRow,thirdRow;
-firstRow.x=oc*axis.x*axis.x+c;
-firstRow.y=oc*axis.x*axis.y-axis.z*s;
-firstRow.z=oc*axis.z*axis.x+axis.y*s;
+firstRow.x=cos(roll)*cos(pitch)-cos(yaw)*sin(roll)*sin(pitch);
+firstRow.y=-1.0*cos(yaw)*cos(pitch)*sin(roll)-cos(roll)*sin(pitch);
+firstRow.z=sin(roll)*sin(yaw);
 
-secondRow.x=oc*axis.x*axis.y+axis.z*s;
-secondRow.y=oc*axis.y*axis.y+c;
-secondRow.z=oc*axis.y*axis.z-axis.x*s;
+secondRow.x=cos(pitch)*sin(roll)+cos(roll)*cos(yaw)*sin(pitch);
+secondRow.y=cos(roll)*cos(yaw)*cos(pitch)-sin(roll)*sin(pitch);
+secondRow.z=-1.0*cos(roll)*sin(yaw);
 
-thirdRow.x=oc*axis.z*axis.x-axis.y*s;
-thirdRow.y=oc*axis.y*axis.z+axis.x*s;
-thirdRow.z=oc*axis.z*axis.z+c;
+thirdRow.x=sin(yaw)*sin(pitch);
+thirdRow.y=sin(yaw)*cos(pitch);
+thirdRow.z=cos(yaw);
 
 tsph.x=psph.x*firstRow.x+psph.y*firstRow.y+psph.z*firstRow.z;
 tsph.y=psph.x*secondRow.x+psph.y*secondRow.y+psph.z*secondRow.z;

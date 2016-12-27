@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA6860B91E12B69E006372CC /* loadImgBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = EA6860B81E12B69E006372CC /* loadImgBtn.png */; };
+		EA6860BB1E12BD1D006372CC /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = EA6860BA1E12BD1D006372CC /* save.png */; };
 		EA88D1621E0FE79600B9804E /* sphere.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA88D1611E0FE79600B9804E /* sphere.jpg */; };
 		EA979F621E0F76B000AE47D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA979F611E0F76B000AE47D0 /* main.m */; };
 		EA979F651E0F76B000AE47D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA979F641E0F76B000AE47D0 /* AppDelegate.m */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA6860B81E12B69E006372CC /* loadImgBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadImgBtn.png; sourceTree = "<group>"; };
+		EA6860BA1E12BD1D006372CC /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		EA88D1611E0FE79600B9804E /* sphere.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sphere.jpg; sourceTree = "<group>"; };
 		EA979F5D1E0F76B000AE47D0 /* photoSphereRotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoSphereRotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA979F611E0F76B000AE47D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				EA979F691E0F76B000AE47D0 /* Main.storyboard */,
 				EA88D1611E0FE79600B9804E /* sphere.jpg */,
 				EAE9AE651E10DC4C0001AFF8 /* fisheye.jpg */,
+				EA6860BA1E12BD1D006372CC /* save.png */,
+				EA6860B81E12B69E006372CC /* loadImgBtn.png */,
 				EA979F6C1E0F76B000AE47D0 /* Assets.xcassets */,
 				EA979F6E1E0F76B000AE47D0 /* LaunchScreen.storyboard */,
 				EA979F711E0F76B000AE47D0 /* Info.plist */,
@@ -169,10 +175,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6860B91E12B69E006372CC /* loadImgBtn.png in Resources */,
 				EAE9AE6C1E120C070001AFF8 /* rectRotation.ciwarpkernel in Resources */,
 				EA979F701E0F76B000AE47D0 /* LaunchScreen.storyboard in Resources */,
 				EA979F7E1E0F78B600AE47D0 /* sample.cikernel in Resources */,
 				EA979F6D1E0F76B000AE47D0 /* Assets.xcassets in Resources */,
+				EA6860BB1E12BD1D006372CC /* save.png in Resources */,
 				EA979F6B1E0F76B000AE47D0 /* Main.storyboard in Resources */,
 				EAE9AE661E10DC4C0001AFF8 /* fisheye.jpg in Resources */,
 				EAE9AE6A1E10FEEE0001AFF8 /* fisheyeToRect.cikernel in Resources */,

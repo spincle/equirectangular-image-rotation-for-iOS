@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "customFilter.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 
 @end
