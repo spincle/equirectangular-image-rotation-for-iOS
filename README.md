@@ -1,10 +1,10 @@
 # equirectangular-image-rotation
-objective-c template for inserting spatial media metadata into video with iPhone app
+objective-c template for rotating equirectangular image
 
 #### Original image
 ![screenshot](./Screenshot/input.jpeg)
 
-#### After pitch,ywa,roll rotation
+#### After roll,yaw and pitch rotation
 ![screenshot](./Screenshot/output.jpeg)
 
 The method used
