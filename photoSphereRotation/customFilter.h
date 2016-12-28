@@ -22,13 +22,6 @@
 
 @end
 
-@interface fisheyeToRect : CIFilter
-{
-    CIImage *inputImage;
-}
-@property (retain, nonatomic) CIImage *inputImage;
-
-@end
 
 @interface rectRotation : CIFilter
 {

@@ -17,9 +17,7 @@
 		EA979F6D1E0F76B000AE47D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA979F6C1E0F76B000AE47D0 /* Assets.xcassets */; };
 		EA979F701E0F76B000AE47D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA979F6E1E0F76B000AE47D0 /* LaunchScreen.storyboard */; };
 		EA979F7E1E0F78B600AE47D0 /* sample.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EA979F7D1E0F78B600AE47D0 /* sample.cikernel */; };
-		EAE9AE661E10DC4C0001AFF8 /* fisheye.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE651E10DC4C0001AFF8 /* fisheye.jpg */; };
 		EAE9AE681E10FE530001AFF8 /* rectRotation.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */; };
-		EAE9AE6A1E10FEEE0001AFF8 /* fisheyeToRect.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE691E10FEEE0001AFF8 /* fisheyeToRect.cikernel */; };
 		EAE9AE6C1E120C070001AFF8 /* rectRotation.ciwarpkernel in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */; };
 		EAE9AE6F1E120EF60001AFF8 /* customFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9AE6E1E120EF60001AFF8 /* customFilter.m */; };
 /* End PBXBuildFile section */
@@ -39,9 +37,7 @@
 		EA979F6F1E0F76B000AE47D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA979F711E0F76B000AE47D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA979F7D1E0F78B600AE47D0 /* sample.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.cikernel; sourceTree = "<group>"; };
-		EAE9AE651E10DC4C0001AFF8 /* fisheye.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fisheye.jpg; sourceTree = "<group>"; };
 		EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rectRotation.cikernel; sourceTree = "<group>"; };
-		EAE9AE691E10FEEE0001AFF8 /* fisheyeToRect.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fisheyeToRect.cikernel; sourceTree = "<group>"; };
 		EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rectRotation.ciwarpkernel; sourceTree = "<group>"; };
 		EAE9AE6D1E120EF60001AFF8 /* customFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customFilter.h; sourceTree = "<group>"; };
 		EAE9AE6E1E120EF60001AFF8 /* customFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customFilter.m; sourceTree = "<group>"; };
@@ -58,6 +54,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1009CBF21E135C1500D3C1CD /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				EA88D1611E0FE79600B9804E /* sphere.jpg */,
+				EA6860BA1E12BD1D006372CC /* save.png */,
+				EA6860B81E12B69E006372CC /* loadImgBtn.png */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
 		EA979F541E0F76B000AE47D0 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +83,7 @@
 		EA979F5F1E0F76B000AE47D0 /* photoSphereRotation */ = {
 			isa = PBXGroup;
 			children = (
+				1009CBF21E135C1500D3C1CD /* Media */,
 				EA979F7A1E0F787200AE47D0 /* Kernels */,
 				EA979F631E0F76B000AE47D0 /* AppDelegate.h */,
 				EA979F641E0F76B000AE47D0 /* AppDelegate.m */,
@@ -85,10 +92,6 @@
 				EAE9AE6D1E120EF60001AFF8 /* customFilter.h */,
 				EAE9AE6E1E120EF60001AFF8 /* customFilter.m */,
 				EA979F691E0F76B000AE47D0 /* Main.storyboard */,
-				EA88D1611E0FE79600B9804E /* sphere.jpg */,
-				EAE9AE651E10DC4C0001AFF8 /* fisheye.jpg */,
-				EA6860BA1E12BD1D006372CC /* save.png */,
-				EA6860B81E12B69E006372CC /* loadImgBtn.png */,
 				EA979F6C1E0F76B000AE47D0 /* Assets.xcassets */,
 				EA979F6E1E0F76B000AE47D0 /* LaunchScreen.storyboard */,
 				EA979F711E0F76B000AE47D0 /* Info.plist */,
@@ -111,7 +114,6 @@
 				EA979F7D1E0F78B600AE47D0 /* sample.cikernel */,
 				EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */,
 				EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */,
-				EAE9AE691E10FEEE0001AFF8 /* fisheyeToRect.cikernel */,
 			);
 			name = Kernels;
 			sourceTree = "<group>";
@@ -182,8 +184,6 @@
 				EA979F6D1E0F76B000AE47D0 /* Assets.xcassets in Resources */,
 				EA6860BB1E12BD1D006372CC /* save.png in Resources */,
 				EA979F6B1E0F76B000AE47D0 /* Main.storyboard in Resources */,
-				EAE9AE661E10DC4C0001AFF8 /* fisheye.jpg in Resources */,
-				EAE9AE6A1E10FEEE0001AFF8 /* fisheyeToRect.cikernel in Resources */,
 				EAE9AE681E10FE530001AFF8 /* rectRotation.cikernel in Resources */,
 				EA88D1621E0FE79600B9804E /* sphere.jpg in Resources */,
 			);

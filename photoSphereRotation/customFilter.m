@@ -35,39 +35,6 @@
     return [[self sample] applyWithExtent:CGRectMake(0, 0, result.extent.size.width, result.extent.size.height) roiCallback:^CGRect(int index, CGRect rect) {
         return CGRectMake(0, 0, CGRectGetWidth(result.extent), CGRectGetHeight(result.extent));
     } arguments:[NSArray arrayWithObjects:result,nil]];
-//    return [[self distortionHole] applyWithExtent:CGRectMake(0, 0, result.extent.size.height, result.extent.size.height) arguments:[NSArray arrayWithObjects:result,nil]];
-}
-
-@end
-
-@implementation fisheyeToRect
-
-@synthesize inputImage;
-
-- (CIKernel *)fisheyeToRect
-{
-    static CIKernel *Kernel = nil;
-    
-    NSBundle    *bundle = [NSBundle bundleForClass:NSClassFromString(@"fisheyeToRect")];
-    NSStringEncoding encoding = NSUTF8StringEncoding;
-    NSError     *error = nil;
-    NSString    *code = [NSString stringWithContentsOfFile:[bundle pathForResource:@"fisheyeToRect" ofType:@"cikernel"] encoding:encoding error:&error];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Kernel = [CIKernel kernelWithString:code];
-    });
-    
-    return Kernel;
-}
-
-- (CIImage *)outputImage
-{
-    float w=self.inputImage.extent.size.width;
-    float h=self.inputImage.extent.size.height;
-    return [[self fisheyeToRect] applyWithExtent:CGRectMake(0, 0,400,400) roiCallback:^CGRect(int index, CGRect rect) {
-        return CGRectMake(0, 0, w,h);
-    } arguments:[NSArray arrayWithObjects:self.inputImage,nil]];
 }
 
 @end
