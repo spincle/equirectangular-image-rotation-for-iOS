@@ -9,12 +9,13 @@ objective-c template for rotating equirectangular image
 
 The method used
 ```  objc
--(NSURL *) insertMetadataWithMovie:(NSURL*)inputPath;
+-(UIImage*) applyRectRotation:(UIImage*) image
 ```
 
-The callback method
+The class used
 ```  objc
--(void)callbackAfterMetadataInserted:(NSNotification *)note
+customFilter.h
+customFilter.m
 ```  
 
 ### my contact email tomtomtongtong@gmail.com
