@@ -78,6 +78,7 @@ UIImage* inputImg;
     roll=slider.value;
     UIImage* outputImg=[self applyRectRotation:inputImg];
     [imgView setImage:outputImg];
+    
 }
 
 - (void)ySliderValueChange:(UISlider *) slider{
@@ -137,11 +138,13 @@ UIImagePickerController *imagePicker;
     [imgView setImage:outputImg];
     UIImageWriteToSavedPhotosAlbum(outputImg,
                                      nil,nil,nil);
+    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
-    inputImg = [info objectForKey:UIImagePickerControllerEditedImage];
+    inputImg = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
     UIImage* outputImg=[self applyRectRotation:inputImg];
     [imgView setImage:outputImg];
 

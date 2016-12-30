@@ -34,8 +34,8 @@ psph.y =-1.0*sin(phi) * sin(2.0*pi-theta);
 psph.z = cos(phi);
 
 //transform matrix multiply
-
 vec3 firstRow,secondRow,thirdRow;
+
 firstRow.x=cos(roll)*cos(pitch)-cos(yaw)*sin(roll)*sin(pitch);
 firstRow.y=-1.0*cos(yaw)*cos(pitch)*sin(roll)-cos(roll)*sin(pitch);
 firstRow.z=sin(roll)*sin(yaw);
@@ -52,7 +52,6 @@ tsph.x=psph.x*firstRow.x+psph.y*firstRow.y+psph.z*firstRow.z;
 tsph.y=psph.x*secondRow.x+psph.y*secondRow.y+psph.z*secondRow.z;
 tsph.z=psph.x*thirdRow.x+psph.y*thirdRow.y+psph.z*thirdRow.z;
 
-//tsph=psph;
 // change back to rect cord
 phi=acos(tsph.z);
 
@@ -66,10 +65,8 @@ else if (tsph.x>=0.0 && tsph.y<=0.0)
 theta=pi*2.0-atan(abs(tsph.y/tsph.x));
 
 dest.x=((theta)/(2.0*pi))*width;
-
 dest.y=(phi/pi)*height;
-//dest.x=destCoord().x;
-//dest.y=destCoord().y;
+
 return dest;
 }
 
