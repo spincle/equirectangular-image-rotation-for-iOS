@@ -14,13 +14,6 @@
 
 #import <CoreImage/CoreImage.h>
 
-@interface sample : CIFilter
-{
-    CIImage *inputImage;
-}
-@property (retain, nonatomic) CIImage *inputImage;
-
-@end
 
 
 @interface rectRotation : CIFilter
