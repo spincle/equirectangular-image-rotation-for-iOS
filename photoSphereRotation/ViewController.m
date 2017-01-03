@@ -17,12 +17,13 @@
 float pi=3.141592654;
 NSURL* imageUrl;
 UIImageView* imgView;
-UIImage* inputImg;
+UIImage *inputImg,*previewImg;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    imageUrl = [[NSBundle mainBundle] URLForResource:@"sphere" withExtension:@"jpg"];
+    imageUrl = [[NSBundle mainBundle] URLForResource:@"sample" withExtension:@"jpg"];
     inputImg=[[UIImage alloc] initWithContentsOfFile:[imageUrl path]];
-    inputImg=[self applyRectRotation:inputImg];
+    previewImg=[self resizeImageWithActualValue:inputImg width:1000 height:500 ];
+    previewImg=[self applyRectRotation:previewImg];
 
     imgView=[[UIImageView alloc] init];
     float w=self.view.frame.size.width;
@@ -76,20 +77,20 @@ UIImage* inputImg;
 - (void)xSliderValueChange:(UISlider *) slider{
    // NSLog(@"value: %f",slider.value);
     roll=slider.value;
-    UIImage* outputImg=[self applyRectRotation:inputImg];
+    UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
     
 }
 
 - (void)ySliderValueChange:(UISlider *) slider{
     yaw=slider.value;
-    UIImage* outputImg=[self applyRectRotation:inputImg];
+    UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
 }
 
 - (void)zSliderValueChange:(UISlider *) slider{
     pitch=slider.value;
-    UIImage* outputImg=[self applyRectRotation:inputImg];
+    UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
 }
 
@@ -124,6 +125,18 @@ float pitch;
     }
 }
 
+- (UIImage *)resizeImageWithActualValue:(UIImage *)image width:(int) widthFix height:(int)heightFix {
+    @autoreleasepool {
+        CGSize newSize=CGSizeMake(widthFix, heightFix);
+        UIGraphicsBeginImageContext( newSize );
+        [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return newImage;
+    }
+}
+
 UIImagePickerController *imagePicker;
 - (IBAction)loadImage:(id)sender {
        imagePicker = [[UIImagePickerController alloc] init];
@@ -154,9 +167,9 @@ UIImagePickerController *imagePicker;
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
     inputImg = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    UIImage* outputImg=[self applyRectRotation:inputImg];
-    [imgView setImage:outputImg];
-    
+    previewImg=[self resizeImageWithActualValue:inputImg width:1000 height:500 ];
+    previewImg=[self applyRectRotation:previewImg];
+    [imgView setImage:previewImg];
 }
 
 -(NSData *)addMetaData:(UIImage *)image {

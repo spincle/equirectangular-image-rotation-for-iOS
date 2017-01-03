@@ -8,37 +8,6 @@
 
 #import "customFilter.h"
 
-@implementation sample
-
-@synthesize inputImage;
-
-- (CIKernel *)sample
-{
-    static CIKernel *Kernel = nil;
-    
-    NSBundle    *bundle = [NSBundle bundleForClass:NSClassFromString(@"sample")];
-    NSStringEncoding encoding = NSUTF8StringEncoding;
-    NSError     *error = nil;
-    NSString    *code = [NSString stringWithContentsOfFile:[bundle pathForResource:@"sample" ofType:@"cikernel"] encoding:encoding error:&error];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-       Kernel = [CIKernel kernelWithString:code];
-    });
-    
-    return Kernel;
-}
-
-- (CIImage *)outputImage
-{
-    CIImage *result = self.inputImage;
-    return [[self sample] applyWithExtent:CGRectMake(0, 0, result.extent.size.width, result.extent.size.height) roiCallback:^CGRect(int index, CGRect rect) {
-        return CGRectMake(0, 0, CGRectGetWidth(result.extent), CGRectGetHeight(result.extent));
-    } arguments:[NSArray arrayWithObjects:result,nil]];
-}
-
-@end
-
 @implementation rectRotation
 
 @synthesize inputImage;

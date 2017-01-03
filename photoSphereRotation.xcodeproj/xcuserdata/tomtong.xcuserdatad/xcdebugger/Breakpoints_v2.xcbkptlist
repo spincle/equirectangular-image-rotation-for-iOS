@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "photoSphereRotation/ViewController.m"
-            timestampString = "505131809.848957"
+            timestampString = "505132730.378785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "-saveImage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "photoSphereRotation/ViewController.m"
-            timestampString = "505131809.848957"
+            timestampString = "505132730.378785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-saveImage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "144"
             endingLineNumber = "144"
-            landmarkName = "-saveImage:"
+            landmarkName = "-loadImage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

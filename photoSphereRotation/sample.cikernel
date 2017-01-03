@@ -1,6 +1,0 @@
-kernel vec4 sampleFilter (sampler src)
-{
-vec4 currentSource = sample (src, samplerCoord (src));         // 1
-currentSource.rgb = currentSource.rgb + 0.5 * currentSource.a;   // 2
-return currentSource;                                          // 3
-}
