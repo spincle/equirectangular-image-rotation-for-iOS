@@ -136,9 +136,18 @@ UIImagePickerController *imagePicker;
 -(IBAction)saveImage:(id)sender {
     UIImage* outputImg=[self applyRectRotation:inputImg];
     [imgView setImage:outputImg];
-    UIImageWriteToSavedPhotosAlbum(outputImg,
-                                     nil,nil,nil);
+    NSMutableDictionary* metadata=[[NSMutableDictionary alloc] init];
+    [metadata setObject:@"RICOH" forKey:(NSString*)kCGImagePropertyExifLensMake];
+    [metadata setObject:@"RICOH THETA S" forKey:(NSString*)kCGImagePropertyExifLensModel];
+
+    NSData* imgData=[self addMetaData:outputImg];
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* filePath=[NSString stringWithFormat:@"%@/sample.jpg",paths[0]];
     
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+    [imgData writeToFile:filePath atomically:YES];
+    NSURL* imgURL=[NSURL fileURLWithPath:filePath];
+    [self saveToAlbum:imgURL toAlbum:@"Photo360" withCompletionBlock:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -147,6 +156,65 @@ UIImagePickerController *imagePicker;
     
     UIImage* outputImg=[self applyRectRotation:inputImg];
     [imgView setImage:outputImg];
-
+    
 }
+
+-(NSData *)addMetaData:(UIImage *)image {
+    ExifContainer *container = [[ExifContainer alloc] init];
+    [container addMakeInfo:@"RICOH"];
+    [container addModelInfo:@"RICOH THETA S"];
+    NSData *imgData = [image addExif:container];
+    return imgData;
+}
+
+- (void)saveToAlbum:(NSURL*)imageURL toAlbum:(NSString*)album withCompletionBlock:(void(^)(NSError *error))block
+{
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if (status != PHAuthorizationStatusAuthorized) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Reminder" message:@"Add photo accessing permission in setting" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action)
+                                 {
+                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                     [alertController dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            [alertController addAction:ok];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            NSMutableArray* assets = [[NSMutableArray alloc]init];
+            PHAssetChangeRequest* assetRequest;
+            @autoreleasepool {
+                assetRequest = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:imageURL];
+                [assets addObject:assetRequest.placeholderForCreatedAsset];
+            }
+            __block PHAssetCollectionChangeRequest* assetCollectionRequest = nil;
+            PHFetchResult* result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+            [result enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PHAssetCollection* collection = (PHAssetCollection*)obj;
+                if ([collection isKindOfClass:[PHAssetCollection class]]) {
+                    if ([[collection localizedTitle] isEqualToString:album]) {
+                        assetCollectionRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collection];
+                        [assetCollectionRequest addAssets:assets];
+                        *stop = YES;
+                    }
+                }
+            }];
+            if (assetCollectionRequest == nil) {
+                assetCollectionRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:album];
+                [assetCollectionRequest addAssets:assets];
+            }
+        }
+                                          completionHandler:^(BOOL success, NSError *error) {
+                                              if (block) {
+                                                  block(error);
+                                              }
+                                          }];
+    }
+}
+
 @end
