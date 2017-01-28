@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "customFilter.h"
+#import "ExifContainer.h"
+#import "UIImage+Exif.h"
+
+@import Photos;
+@import AssetsLibrary;
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
