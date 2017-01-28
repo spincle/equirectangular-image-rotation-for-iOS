@@ -37,6 +37,8 @@ UIImage *inputImg,*previewImg;
     xSlider.maximumValue = 2*pi;
     xSlider.minimumValue = 0;
     xSlider.value=0;
+    roll=xSlider.value;
+    
     [xSlider addTarget:self action:@selector(xSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: xSlider];
     
@@ -44,6 +46,8 @@ UIImage *inputImg,*previewImg;
     ySlider.maximumValue = 2*pi;
     ySlider.minimumValue = 0;
     ySlider.value=0;
+    yaw=ySlider.value;
+    
     [ySlider addTarget:self action:@selector(ySliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: ySlider];
     
@@ -51,6 +55,8 @@ UIImage *inputImg,*previewImg;
     zSlider.maximumValue = 2*pi;
     zSlider.minimumValue = 0;
     zSlider.value=0;
+    pitch=zSlider.value;
+    
     [zSlider addTarget:self action:@selector(zSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: zSlider];
     
