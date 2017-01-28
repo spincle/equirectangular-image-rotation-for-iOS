@@ -15,23 +15,6 @@
 #import <CoreImage/CoreImage.h>
 
 
-
-@interface rectRotation : CIFilter
-{
-    CIImage *inputImage;
-    NSNumber* isX;
-    NSNumber* isY;
-    NSNumber* isZ;
-    NSNumber* angle;
-}
-@property (retain, nonatomic) CIImage *inputImage;
-@property (retain, nonatomic) NSNumber* isX;
-@property (retain, nonatomic) NSNumber* isY;
-@property (retain, nonatomic) NSNumber* isZ;
-@property (retain, nonatomic) NSNumber* angle;
-
-@end
-
 @interface rectRotation2 : CIFilter //warp kernel
 {
     CIImage *inputImage;

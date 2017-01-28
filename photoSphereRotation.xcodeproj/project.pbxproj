@@ -18,7 +18,6 @@
 		EA979F6D1E0F76B000AE47D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA979F6C1E0F76B000AE47D0 /* Assets.xcassets */; };
 		EA979F701E0F76B000AE47D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA979F6E1E0F76B000AE47D0 /* LaunchScreen.storyboard */; };
 		EACE67B01E16ABAA001D4BCC /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EACE67AF1E16ABAA001D4BCC /* sample.jpg */; };
-		EAE9AE681E10FE530001AFF8 /* rectRotation.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */; };
 		EAE9AE6C1E120C070001AFF8 /* rectRotation.ciwarpkernel in Resources */ = {isa = PBXBuildFile; fileRef = EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */; };
 		EAE9AE6F1E120EF60001AFF8 /* customFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9AE6E1E120EF60001AFF8 /* customFilter.m */; };
 /* End PBXBuildFile section */
@@ -41,7 +40,6 @@
 		EA979F6F1E0F76B000AE47D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA979F711E0F76B000AE47D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EACE67AF1E16ABAA001D4BCC /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
-		EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rectRotation.cikernel; sourceTree = "<group>"; };
 		EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rectRotation.ciwarpkernel; sourceTree = "<group>"; };
 		EAE9AE6D1E120EF60001AFF8 /* customFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customFilter.h; sourceTree = "<group>"; };
 		EAE9AE6E1E120EF60001AFF8 /* customFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customFilter.m; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				EAE9AE6B1E120C070001AFF8 /* rectRotation.ciwarpkernel */,
-				EAE9AE671E10FE530001AFF8 /* rectRotation.cikernel */,
 			);
 			name = Kernels;
 			sourceTree = "<group>";
@@ -199,7 +196,6 @@
 				EA979F6D1E0F76B000AE47D0 /* Assets.xcassets in Resources */,
 				EA6860BB1E12BD1D006372CC /* save.png in Resources */,
 				EA979F6B1E0F76B000AE47D0 /* Main.storyboard in Resources */,
-				EAE9AE681E10FE530001AFF8 /* rectRotation.cikernel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
