@@ -18,6 +18,8 @@ float pi=3.141592654;
 NSURL* imageUrl;
 UIImageView* imgView;
 UIImage *inputImg,*previewImg;
+UILabel* xLabel,*yLabel,*zLabel;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     imageUrl = [[NSBundle mainBundle] URLForResource:@"sample" withExtension:@"jpg"];
@@ -32,30 +34,39 @@ UIImage *inputImg,*previewImg;
     [imgView setImage:inputImg];
     [imgView setContentMode:UIViewContentModeScaleAspectFit];
     [self.view addSubview:imgView];
-    
-    UISlider* xSlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.6, w*0.9, 30)];
-    xSlider.maximumValue = 2*pi;
-    xSlider.minimumValue = 0;
+
+    xSlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.6, w*0.9, 30)];
+    xSlider.maximumValue = pi;
+    xSlider.minimumValue = -1*pi;
     xSlider.value=0;
     roll=xSlider.value;
+    xLabel=[[UILabel alloc] init];
+    xLabel.frame = CGRectMake(w*0.05, h*0.55, 100, 30);
+    [self.view addSubview:xLabel];
     
     [xSlider addTarget:self action:@selector(xSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: xSlider];
     
-    UISlider* ySlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.7, w*0.9, 30)];
-    ySlider.maximumValue = 2*pi;
-    ySlider.minimumValue = 0;
+    ySlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.7, w*0.9, 30)];
+    ySlider.maximumValue = pi;
+    ySlider.minimumValue = -1*pi;
     ySlider.value=0;
     yaw=ySlider.value;
+    yLabel=[[UILabel alloc] init];
+    yLabel.frame = CGRectMake(w*0.05, h*0.65, 100, 30);
+    [self.view addSubview:yLabel];
     
     [ySlider addTarget:self action:@selector(ySliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: ySlider];
     
-    UISlider* zSlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.8, w*0.9, 30)];
-    zSlider.maximumValue = 2*pi;
-    zSlider.minimumValue = 0;
+    zSlider = [[UISlider alloc]initWithFrame:CGRectMake(w*0.05, h*0.8, w*0.9, 30)];
+    zSlider.maximumValue = pi;
+    zSlider.minimumValue = -1*pi;
     zSlider.value=0;
     pitch=zSlider.value;
+    zLabel=[[UILabel alloc] init];
+    zLabel.frame = CGRectMake(w*0.05, h*0.75, 100, 30);
+    [self.view addSubview:zLabel];
     
     [zSlider addTarget:self action:@selector(zSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview: zSlider];
@@ -83,6 +94,7 @@ UIImage *inputImg,*previewImg;
 - (void)xSliderValueChange:(UISlider *) slider{
    // NSLog(@"value: %f",slider.value);
     roll=slider.value;
+    xLabel.text=[NSString stringWithFormat:@"Roll %f",roll];
     UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
     
@@ -90,12 +102,14 @@ UIImage *inputImg,*previewImg;
 
 - (void)ySliderValueChange:(UISlider *) slider{
     yaw=slider.value;
+    yLabel.text=[NSString stringWithFormat:@"Yaw %f",yaw];
     UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
 }
 
 - (void)zSliderValueChange:(UISlider *) slider{
     pitch=slider.value;
+    zLabel.text=[NSString stringWithFormat:@"Pitch %f",pitch];
     UIImage* outputImg=[self applyRectRotation:previewImg];
     [imgView setImage:outputImg];
 }
@@ -149,91 +163,34 @@ UIImagePickerController *imagePicker;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
         imagePicker.allowsEditing = YES;
+    
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
 
 -(IBAction)saveImage:(id)sender {
     UIImage* outputImg=[self applyRectRotation:inputImg];
-    [imgView setImage:outputImg];
-    NSMutableDictionary* metadata=[[NSMutableDictionary alloc] init];
-    [metadata setObject:@"RICOH" forKey:(NSString*)kCGImagePropertyExifLensMake];
-    [metadata setObject:@"RICOH THETA S" forKey:(NSString*)kCGImagePropertyExifLensModel];
-
-    NSData* imgData=[self addMetaData:outputImg];
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* filePath=[NSString stringWithFormat:@"%@/sample.jpg",paths[0]];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
-    [imgData writeToFile:filePath atomically:YES];
-    NSURL* imgURL=[NSURL fileURLWithPath:filePath];
-    [self saveToAlbum:imgURL toAlbum:@"Photo360" withCompletionBlock:nil];
+    UIImageWriteToSavedPhotosAlbum(outputImg,nil,nil,nil);
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
     inputImg = [info objectForKey:UIImagePickerControllerOriginalImage];
     
+    xLabel.text=[NSString stringWithFormat:@"Roll %d",0];
+    yLabel.text=[NSString stringWithFormat:@"Yaw %d",0];
+    zLabel.text=[NSString stringWithFormat:@"Pitch %d",0];
+    
+    xSlider.value=0;
+    ySlider.value=0;
+    zSlider.value=0;
+    roll=0;
+    yaw=0;
+    pitch=0;
     previewImg=[self resizeImageWithActualValue:inputImg width:1000 height:500 ];
-    previewImg=[self applyRectRotation:previewImg];
+   // previewImg=[self applyRectRotation:previewImg];
     [imgView setImage:previewImg];
 }
 
--(NSData *)addMetaData:(UIImage *)image {
-    ExifContainer *container = [[ExifContainer alloc] init];
-    [container addMakeInfo:@"RICOH"];
-    [container addModelInfo:@"RICOH THETA S"];
-    NSData *imgData = [image addExif:container];
-    return imgData;
-}
 
-- (void)saveToAlbum:(NSURL*)imageURL toAlbum:(NSString*)album withCompletionBlock:(void(^)(NSError *error))block
-{
-    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-        if (status != PHAuthorizationStatusAuthorized) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Reminder" message:@"Add photo accessing permission in setting" preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action)
-                                 {
-                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                     [alertController dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            [alertController addAction:ok];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-    }];
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        
-        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-            NSMutableArray* assets = [[NSMutableArray alloc]init];
-            PHAssetChangeRequest* assetRequest;
-            @autoreleasepool {
-                assetRequest = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:imageURL];
-                [assets addObject:assetRequest.placeholderForCreatedAsset];
-            }
-            __block PHAssetCollectionChangeRequest* assetCollectionRequest = nil;
-            PHFetchResult* result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-            [result enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                PHAssetCollection* collection = (PHAssetCollection*)obj;
-                if ([collection isKindOfClass:[PHAssetCollection class]]) {
-                    if ([[collection localizedTitle] isEqualToString:album]) {
-                        assetCollectionRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collection];
-                        [assetCollectionRequest addAssets:assets];
-                        *stop = YES;
-                    }
-                }
-            }];
-            if (assetCollectionRequest == nil) {
-                assetCollectionRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:album];
-                [assetCollectionRequest addAssets:assets];
-            }
-        }
-                                          completionHandler:^(BOOL success, NSError *error) {
-                                              if (block) {
-                                                  block(error);
-                                              }
-                                          }];
-    }
-}
 
 @end
