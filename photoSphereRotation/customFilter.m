@@ -38,7 +38,7 @@
     float h=self.inputImage.extent.size.height;
     return [[self rectRotation2] applyWithExtent:CGRectMake(0, 0,w,h) roiCallback:^CGRect(int index, CGRect rect) {
         return CGRectMake(0, 0, w,h);
-    } inputImage:self.inputImage arguments:[NSArray arrayWithObjects:pitch,roll,yaw,@(w),@(h),nil]];
+    } inputImage:self.inputImage arguments:[NSArray arrayWithObjects:roll,yaw,pitch,@(w),@(h),nil]];
 }
 
 @end

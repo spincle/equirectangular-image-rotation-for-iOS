@@ -169,7 +169,8 @@ UIImagePickerController *imagePicker;
     [self saveToAlbum:imgURL toAlbum:@"Photo360" withCompletionBlock:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
     inputImg = [info objectForKey:UIImagePickerControllerOriginalImage];
     

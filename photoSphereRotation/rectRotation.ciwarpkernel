@@ -1,5 +1,6 @@
 kernel vec2 rectRotation(float roll,float yaw, float pitch,float width, float height)
 {
+
 vec2 dest;
 float theta,phi,r;
 vec3 psph,tsph;
