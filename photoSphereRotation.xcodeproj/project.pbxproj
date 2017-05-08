@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1028B25E1E1BAD990038959C /* ExifContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1028B25B1E1BAD990038959C /* ExifContainer.m */; };
-		1028B25F1E1BAD990038959C /* UIImage+Exif.m in Sources */ = {isa = PBXBuildFile; fileRef = 1028B25D1E1BAD990038959C /* UIImage+Exif.m */; };
 		EA6860B91E12B69E006372CC /* loadImgBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = EA6860B81E12B69E006372CC /* loadImgBtn.png */; };
 		EA6860BB1E12BD1D006372CC /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = EA6860BA1E12BD1D006372CC /* save.png */; };
 		EA979F621E0F76B000AE47D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA979F611E0F76B000AE47D0 /* main.m */; };
@@ -23,10 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1028B25A1E1BAD990038959C /* ExifContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExifContainer.h; sourceTree = "<group>"; };
-		1028B25B1E1BAD990038959C /* ExifContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExifContainer.m; sourceTree = "<group>"; };
-		1028B25C1E1BAD990038959C /* UIImage+Exif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Exif.h"; sourceTree = "<group>"; };
-		1028B25D1E1BAD990038959C /* UIImage+Exif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Exif.m"; sourceTree = "<group>"; };
 		EA6860B81E12B69E006372CC /* loadImgBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadImgBtn.png; sourceTree = "<group>"; };
 		EA6860BA1E12BD1D006372CC /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		EA979F5D1E0F76B000AE47D0 /* photoSphereRotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoSphereRotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,17 +60,6 @@
 			name = Media;
 			sourceTree = "<group>";
 		};
-		1028B2601E1BB01F0038959C /* SimpleExif */ = {
-			isa = PBXGroup;
-			children = (
-				1028B25A1E1BAD990038959C /* ExifContainer.h */,
-				1028B25B1E1BAD990038959C /* ExifContainer.m */,
-				1028B25C1E1BAD990038959C /* UIImage+Exif.h */,
-				1028B25D1E1BAD990038959C /* UIImage+Exif.m */,
-			);
-			name = SimpleExif;
-			sourceTree = "<group>";
-		};
 		EA979F541E0F76B000AE47D0 = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +79,6 @@
 		EA979F5F1E0F76B000AE47D0 /* photoSphereRotation */ = {
 			isa = PBXGroup;
 			children = (
-				1028B2601E1BB01F0038959C /* SimpleExif */,
 				1009CBF21E135C1500D3C1CD /* Media */,
 				EA979F7A1E0F787200AE47D0 /* Kernels */,
 				EA979F631E0F76B000AE47D0 /* AppDelegate.h */,
@@ -207,9 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA979F681E0F76B000AE47D0 /* ViewController.m in Sources */,
-				1028B25E1E1BAD990038959C /* ExifContainer.m in Sources */,
 				EA979F651E0F76B000AE47D0 /* AppDelegate.m in Sources */,
-				1028B25F1E1BAD990038959C /* UIImage+Exif.m in Sources */,
 				EAE9AE6F1E120EF60001AFF8 /* customFilter.m in Sources */,
 				EA979F621E0F76B000AE47D0 /* main.m in Sources */,
 			);
